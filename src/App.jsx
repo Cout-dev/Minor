@@ -4,6 +4,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Health from './components/Health';
 import About from './components/About';
+import Stress from './components/disease/Stress';
+import Diabetes from './components/disease/Diabetes';
+import Heart from './components/disease/Heart';
+import Thyroid from './components/disease/Thyroid';
+import Calorie from './components/disease/Calorie';
 
 const App = () => {
   return (
@@ -15,10 +20,17 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/health" element={<Health />} />
           <Route path="/about" element={<About />} />
+
+          <Route path="/Stress" element={<Stress />} />
+          <Route path="/Diabetes" element={<Diabetes />} />
+          <Route path="/Heart" element={<Heart />} />
+          <Route path="/Thyroid" element={<Thyroid />} />
+          <Route path="/Calorie" element={<Calorie />} />
+          
         </Routes>
       </div>
     </BrowserRouter>
   );
 };
 
-export default App;
+export default App; 
