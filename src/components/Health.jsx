@@ -6,6 +6,12 @@ const Health = () => {
   const healthTips = [
     {
       img: "https://via.placeholder.com/150",
+      title: "General Health Prediction",
+      description: "Predict your general health based on lifestyle choices.",
+      link: "/Obesity",  // Link to calorie form
+    },
+    {
+      img: "https://via.placeholder.com/150",
       title: "Stress Level Detector",
       description: "Check your stress levels with our AI-powered tool.",
       link: "/Stress",  // Link to stress form
@@ -18,21 +24,21 @@ const Health = () => {
     },
     {
       img: "https://via.placeholder.com/150",
-      title: "Thyroid Check",
-      description: "Predict thyroid conditions with our medical tool.",
+      title: "COVID-19 Risk Prediction",
+      description: "Assess your COVID-19 risk based on symptoms.",
       link: "/Thyroid",  // Link to thyroid form
     },
     {
       img: "https://via.placeholder.com/150",
-      title: "Heart Disease Prediction",
+      title: "Lung Cancer Prediction",
       description: "Assess your heart disease risk based on medical data.",
-      link: "/Heart",  // Link to heart form
+      link: "/Lungs",  // Link to heart form
     },
     {
       img: "https://via.placeholder.com/150",
-      title: "Calorie Burnt Estimator",
-      description: "Find out how many calories you burn daily.",
-      link: "/Calorie",  // Link to calorie form
+      title: "Sleep Disorder Prediction",
+      description: "Check your sleep health with our AI-powered tool.",
+      link: "/Sleep",  // Link to calorie form
     },
   ];
 

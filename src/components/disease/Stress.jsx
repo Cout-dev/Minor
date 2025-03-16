@@ -1,21 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const Stress = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [result, setResult] = useState(null);
 
-  const onSubmit = (data) => {
-    console.log("Form Data Submitted:", data);
-    alert("Form submitted successfully!");
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/predict/stress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const responseData = await response.json();
+      setResult(responseData["Stress Level"]);
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error connecting to the backend!");
+    }
   };
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-xl font-semibold mb-4">Know your Stress level</h2>
+      <h2 className="text-xl font-semibold mb-4">Know Your Stress Level</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
         <label>Gender:
           <select {...register("gender", { required: true })} className="border p-2 w-full">
@@ -30,15 +38,30 @@ const Stress = () => {
         {errors.age && <p className="text-red-500">Age is required</p>}
 
         <label>Occupation:
-          <input type="number" {...register("occupation", { required: true })} className="border p-2 w-full"/>
+          <select {...register("occupation", { required: true })} className="border p-2 w-full">
+            <option value="1">Doctor</option>
+            <option value="2">Engineer</option>
+            <option value="3">Lawyer</option>
+            <option value="4">Manager</option>
+            <option value="5">Nurse</option>
+            <option value="6">Sales Representative</option>
+            <option value="7">Sales Person</option>
+            <option value="8">Scientist</option>
+            <option value="9">Software Engineer</option>
+            <option value="10">Teacher</option>
+          </select>
         </label>
-        
+
         <label>Sleep Duration (hours):
           <input type="number" step="0.1" {...register("sleep", { required: true })} className="border p-2 w-full"/>
         </label>
 
         <label>BMI Category:
-          <input type="number" {...register("bmiCategory", { required: true })} className="border p-2 w-full"/>
+          <select {...register("bmiCategory", { required: true })} className="border p-2 w-full">
+            <option value="0">Normal weight</option>
+            <option value="2">Overweight</option>
+            <option value="1">Obese</option>
+          </select>
         </label>
 
         <label>Heart Rate (bpm):
@@ -57,6 +80,12 @@ const Stress = () => {
           Submit
         </button>
       </form>
+
+      {result !== null && (
+        <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+          <h3 className="text-lg font-semibold">Your Stress Level is: {result}</h3>
+        </div>
+      )}
     </div>
   );
 };
