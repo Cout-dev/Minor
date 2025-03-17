@@ -73,6 +73,14 @@ const Lungs = () => {
         <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
           <h3 className="text-lg font-semibold">Lungs Disease Prediction:</h3>
           <p className="text-xl">{result === 1 ? "Positive" : "Negative"}</p>
+          {result === 1 ? (
+            <p className="text-red-600 font-semibold">🚨 Recommendation: Visit a doctor as soon as possible.</p>
+          ) : (
+            <div>
+              <p className="text-green-600 font-semibold">✅ Recommendation:</p>
+              <p>🎥 Watch: <a href="https://www.youtube.com/watch?v=C2kJQ4ufzXc&t=228s&ab_channel=Dr.EricBergDC" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">How to Detoxify Your Lungs (Dr. Eric Berg DC)</a></p>
+            </div>
+          )}
         </div>
       )}
     </div>

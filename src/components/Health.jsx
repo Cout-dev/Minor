@@ -1,67 +1,87 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./disease/Stress.jsx"
+import "./disease/Stress.jsx";
+import "./health.css"; // Make sure to include a CSS file for animations
 
 const Health = () => {
   const healthTips = [
     {
-      img: "https://via.placeholder.com/150",
+      img: "public/gen.png",
       title: "General Health Prediction",
       description: "Predict your general health based on lifestyle choices.",
-      link: "/Obesity",  // Link to calorie form
+      link: "/Genhealth",
+      diseaseInfo: "Maintaining a healthy lifestyle can prevent obesity-related diseases like diabetes and heart issues."
     },
     {
-      img: "https://via.placeholder.com/150",
+      img: "public/download.jpeg",
       title: "Stress Level Detector",
       description: "Check your stress levels with our AI-powered tool.",
-      link: "/Stress",  // Link to stress form
+      link: "/Stress",
+      diseaseInfo: "Chronic stress can lead to high blood pressure, anxiety, and sleep disorders."
     },
     {
-      img: "https://via.placeholder.com/150",
+      img: "public/dia.jpeg",
       title: "Diabetes Prediction",
       description: "Analyze your risk of diabetes using machine learning.",
-      link: "/Diabetes",  // Link to diabetes form
+      link: "/Diabetes",
+      diseaseInfo: "Diabetes affects millions globally. Early prediction helps in better management."
     },
     {
-      img: "https://via.placeholder.com/150",
+      img: "public/cov.jpeg",
       title: "COVID-19 Risk Prediction",
       description: "Assess your COVID-19 risk based on symptoms.",
-      link: "/Thyroid",  // Link to thyroid form
+      link: "/Thyroid",
+      diseaseInfo: "Staying informed about your COVID risk can help in early detection and precautionary measures."
     },
     {
-      img: "https://via.placeholder.com/150",
+      img: "public/lung.jpeg",
       title: "Lung Cancer Prediction",
-      description: "Assess your heart disease risk based on medical data.",
-      link: "/Lungs",  // Link to heart form
+      description: "Assess your lung cancer risk based on medical data.",
+      link: "/Lungs",
+      diseaseInfo: "Lung cancer risk factors include smoking, pollution, and genetic predisposition."
     },
     {
-      img: "https://via.placeholder.com/150",
+      img: "public/sle.jpeg",
       title: "Sleep Disorder Prediction",
       description: "Check your sleep health with our AI-powered tool.",
-      link: "/Sleep",  // Link to calorie form
+      link: "/Sleep",
+      diseaseInfo: "Sleep disorders can lead to memory issues, fatigue, and weakened immunity."
     },
   ];
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen flex flex-col items-center">
-      <h1 className="text-4xl font-bold text-blue-700 dark:text-sky-500 my-8">
+    <div
+      className="min-h-screen flex flex-col items-center"
+      style={{
+        background:
+          "linear-gradient(to right, #2C5364, #203A43, #0F2027)",
+      }}
+    >
+      <h1 className="text-4xl font-bold text-blue-200 my-8">
         Health Predictions
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 lg:px-20 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 lg:px-20 w-full">
         {healthTips.map((tip, index) => (
           <Link to={tip.link} key={index} className="no-underline">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 flex flex-col items-center text-center cursor-pointer transition-transform hover:scale-105">
-              <img
-                src={tip.img}
-                alt={tip.title}
-                className="w-full h-40 object-cover rounded-md"
-              />
-              <h2 className="text-2xl font-bold mt-4 text-blue-700 dark:text-sky-500">
-                {tip.title}
-              </h2>
-              <p className="mt-2 text-gray-700 dark:text-gray-300">
-                {tip.description}
-              </p>
+            <div className="flip-card">
+              <div className="flip-card-inner">
+                {/* Front Side */}
+                <div className="flip-card-front">
+                  <img
+                    src={tip.img}
+                    alt={tip.title}
+                    className="w-full h-56 object-cover rounded-md"
+                  />
+                  <h2 className="text-2xl font-bold mt-4 text-blue-300">
+                    {tip.title}
+                  </h2>
+                </div>
+                {/* Back Side */}
+                <div className="flip-card-back">
+                  <h2 className="text-xl font-bold text-white">{tip.title}</h2>
+                  <p className="mt-2 text-gray-300">{tip.diseaseInfo}</p>
+                </div>
+              </div>
             </div>
           </Link>
         ))}

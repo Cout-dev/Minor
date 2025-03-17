@@ -1,34 +1,20 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const occupations = [
-  "Doctor", "Engineer", "Lawyer", "Manager", "Nurse", 
-  "Sales Representative", "Salesperson", "Scientist", 
-  "Software Engineer", "Teacher"
-];
-
 const Sleep = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [result, setResult] = useState(null);
 
   const onSubmit = async (data) => {
     try {
-      const occupationData = occupations.reduce((acc, occ) => {
-        acc[`Occupation_${occ}`] = data.Occupation === occ ? 1 : 0;
-        return acc;
-      }, {});
-
-      delete data.Occupation;
-      const formattedData = { ...data, ...occupationData };
-
       const response = await fetch("http://127.0.0.1:5000/predict/sleep", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formattedData),
+        body: JSON.stringify(data),
       });
 
       const responseData = await response.json();
-      setResult(responseData?.["Sleep Disorder Prediction"] || "No prediction received");
+      setResult(responseData["Sleep Disorder Prediction"] || "No prediction received");
     } catch (error) {
       console.error("Error:", error);
       alert("Error connecting to the backend!");
@@ -36,66 +22,26 @@ const Sleep = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
+    <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-xl font-semibold mb-4">Sleep Disorder Prediction</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-        <label>Gender:
-          <select {...register("Gender", { required: true })} className="border p-2 w-full">
-            <option value="1">Male</option>
-            <option value="0">Female</option>
-          </select>
-        </label>
-
         <label>Age:
           <input type="number" {...register("Age", { required: true })} className="border p-2 w-full"/>
+        </label>
+
+        <label>Gender:
+          <select {...register("Gender", { required: true })} className="border p-2 w-full">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
         </label>
 
         <label>Sleep Duration (hours):
           <input type="number" step="0.1" {...register("Sleep Duration", { required: true })} className="border p-2 w-full"/>
         </label>
 
-        <label>Quality of Sleep (1-10):
-          <input type="number" {...register("Quality of Sleep", { required: true, min: 1, max: 10 })} className="border p-2 w-full"/>
-        </label>
-
-        <label>Physical Activity Level (10-100):
-          <input type="number" {...register("Physical Activity Level", { required: true, min: 1, max: 10 })} className="border p-2 w-full"/>
-        </label>
-
         <label>Stress Level (1-8):
-          <input type="number" {...register("Stress Level", { required: true, min: 1, max: 10 })} className="border p-2 w-full"/>
-        </label>
-
-        <label>BMI Category:
-          <select {...register("BMI Category", { required: true })} className="border p-2 w-full">
-            <option value="1">Normal Weight</option>
-            <option value="2">Obese</option>
-            <option value="3">Overweight</option>
-          </select>
-        </label>
-
-        <label>Heart Rate:
-          <input type="number" {...register("Heart Rate", { required: true })} className="border p-2 w-full"/>
-        </label>
-
-        <label>Daily Steps:
-          <input type="number" {...register("Daily Steps", { required: true })} className="border p-2 w-full"/>
-        </label>
-
-        <label>Systolic BP (usually 120):
-          <input type="number" {...register("Systolic BP", { required: true })} className="border p-2 w-full"/>
-        </label>
-
-        <label>Diastolic BP (usually 80):
-          <input type="number" {...register("Diastolic BP", { required: true })} className="border p-2 w-full"/>
-        </label>
-
-        <label>Occupation:
-          <select {...register("Occupation", { required: true })} className="border p-2 w-full">
-            {occupations.map((occ) => (
-              <option key={occ} value={occ}>{occ}</option>
-            ))}
-          </select>
+          <input type="number" {...register("Stress Level", { required: true, min: 1, max: 8 })} className="border p-2 w-full"/>
         </label>
 
         <button type="submit" className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">
@@ -103,9 +49,19 @@ const Sleep = () => {
         </button>
       </form>
 
-      {result && (
+      {result !== null && (
         <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
-          <h3 className="text-lg font-semibold">Sleep Disorder Prediction: {result}</h3>
+          <h3 className="text-lg font-semibold">Sleep Disorder Prediction:</h3>
+          <p className="text-xl">{result}</p>
+          {result === "Insomnia" && (
+            <p className="text-red-600 font-semibold">🎥 Watch: <a href="https://www.youtube.com/watch?v=WVPtF7gr1jw&ab_channel=TherapyinaNutshell" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">How to Fall Asleep Faster: CBT-Insomnia Treatment</a></p>
+          )}
+          {result === "Sleep Apnea" && (
+            <p className="text-red-600 font-semibold">🚨 Recommendation: Visit a doctor as soon as possible.</p>
+          )}
+          {result === "No Sleep Disorder" && (
+            <p className="text-green-600 font-semibold">✅ Recommendation: <a href="https://www.youtube.com/watch?v=5MuIMqhT8DM&t=882s&ab_channel=TED" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Sleep Is Your Superpower | Matt Walker | TED</a></p>
+          )}
         </div>
       )}
     </div>

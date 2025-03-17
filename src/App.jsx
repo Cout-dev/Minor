@@ -8,7 +8,7 @@ import Stress from './components/disease/Stress';
 import Diabetes from './components/disease/Diabetes';
 import Lungs from './components/disease/Lungs';
 import Thyroid from './components/disease/Thyroid';
-import Obesity from './components/disease/Obesity';
+import Genhealth from './components/disease/Genhealth';
 import Sleep from './components/disease/Sleep';
 
 const App = () => {
@@ -26,7 +26,7 @@ const App = () => {
           <Route path="/Diabetes" element={<Diabetes />} />
           <Route path="/Lungs" element={<Lungs />} />
           <Route path="/Thyroid" element={<Thyroid />} />
-          <Route path="/Obesity" element={<Obesity />} />
+          <Route path="/Genhealth" element={<Genhealth />} />
           <Route path="/Sleep" element={<Sleep />} />
           
         </Routes>
