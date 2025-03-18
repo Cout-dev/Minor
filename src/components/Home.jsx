@@ -1,62 +1,151 @@
 import React from "react";
+import { motion } from "framer-motion";
 import "./home.css";
 
 const Home = () => {
+  const fadeInLeft = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 1.2 } },
+  };
+
+  const fadeInRight = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 1.2 } },
+  };
+
   return (
-    <div className="flex flex-col items-center">
+    <div
+      className="flex flex-col items-center justify-center min-h-screen text-white text-center px-6 overflow-hidden"
+      style={{
+        background: `linear-gradient(to left, rgba(44, 83, 100, 0.8), rgba(32, 58, 67, 0.8), rgba(15, 32, 39, 0.8)), 
+                     url('/img1.jpeg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       {/* Hero Section */}
-      <div className="text-center p-4">
-        <h1 className="font-poppins text-4xl md:text-5xl font-bold rounded-lg p-2 text-blue-700 dark:text-sky-500">
+      <div className="p-4">
+        <h1 className="font-poppins text-4xl md:text-5xl font-bold p-2 text-blue-200 mt-20">
           The Place to Make Your Lifestyle Changes Correctly
         </h1>
-        <h2 className="text-2xl md:text-3xl font-bold mt-2 dark:text-green-500">
+        <h2 className="text-2xl md:text-3xl font-bold mt-7 text-green-300 mb-4 ">
           Get Your Health on Track
         </h2>
       </div>
 
+      {/* Button */}
       <button
-        className="mt-4 px-4 py-2 bg-white text-blue-600 font-bold rounded-lg shadow-lg ring shadow-indigo-500/50 hover:bg-blue-100 transition duration-300 mb-3"
-        onClick={() => (window.location.href = "/health")}
-      >
-        Visit Health Page
-      </button>
+  className="mt-4 px-6 py-3 bg-gradient-to-r from-[#71B280] to-[#134E5E] text-white font-bold rounded-lg shadow-lg hover:opacity-90 transition-transform duration-300 transform hover:scale-105 active:scale-95 text-2xl"
+  onClick={() => (window.location.href = "/health")}
+>
+  Visit Health Page
+</button>
 
-      {/* Gradient Section */}
-      <div className="relative w-full bg-gradient-to-r from-blue-400 to-blue-600 text-white  ">
-        <svg
-          className="absolute top-0 left-0 w-full -translate-y-1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1440 320"
+
+      {/* Content Section - 2 Boxes per Row */}
+      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl">
+        {/* What is Healthetics? */}
+        <motion.div
+          className="p-6 bg-gray-800 rounded-lg shadow-lg w-80 md:w-96"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInLeft}
         >
-          <path
-            fill="#FFFFFF"
-            fillOpacity="1"
-            d="M0,192L48,192C96,192,192,192,288,202.7C384,213,480,235,576,213.3C672,192,768,128,864,112C960,96,1056,128,1152,138.7C1248,149,1344,139,1392,133.3L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
-          ></path>
-        </svg>
+          <h2 className="text-xl font-bold text-green-300 mb-2">What is Healthetics?</h2>
+          <p className="text-gray-300">
+            Healthetics is an AI-powered platform designed to analyze health data, 
+            provide personalized insights, and help users make informed lifestyle choices 
+            through machine learning-driven predictions.
+          </p>
+        </motion.div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between mt-20 px-6 md:px-16 py-10 md:py-12">
-          {/* Text Section */}
-          <div className="md:w-1/2 mb-6 md:mb-0 text-center md:text-left">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 pt-10">
-              Shape Your Lifestyle
-            </h2>
-            <p className="text-base md:text-lg">
-              Discover the best practices to maintain a healthy lifestyle. Make
-              small, sustainable changes to live a balanced and fulfilling life.
-            </p>
-          </div>
+        {/* Our Aim */}
+        <motion.div
+          className="p-6 bg-gray-800 rounded-lg shadow-lg w-80 md:w-96"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInRight}
+        >
+          <h2 className="text-xl font-bold text-green-300 mb-2">Our Aim</h2>
+          <p className="text-gray-300">
+            Our goal is to empower individuals with AI-driven health predictions and 
+            personalized lifestyle guidance, helping them take control of their well-being 
+            before serious health issues arise.
+          </p>
+        </motion.div>
 
-          {/* Image Section */}
-          <div className="md:w-1/2 flex justify-center md:justify-end pt-10">
-            <img
-              src="public/Freshman_15-removebg-preview.png"
-              alt="Healthy Lifestyle"
-              className="rounded-2xl max-w-full h-auto"
-              style={{ maxWidth: "300px" }}
-            />
-          </div>
-        </div>
+        {/* How to Use Healthetics */}
+        <motion.div
+          className="p-6 bg-gray-800 rounded-lg shadow-lg w-80 md:w-96"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInLeft}
+        >
+          <h2 className="text-xl font-bold text-green-300 mb-2">How to Use?</h2>
+          <p className="text-gray-300 text-left">
+            1️. Enter your basic health data.<br />
+            2️. Get instant AI-powered predictions.<br />
+            3️. Receive personalized lifestyle recommendations.<br />
+            4️. Improve your health with data-driven insights.
+          </p>
+        </motion.div>
+
+        {/* Future Aspects */}
+        <motion.div
+          className="p-6 bg-gray-800 rounded-lg shadow-lg w-80 md:w-96"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInRight}
+        >
+          <h2 className="text-xl font-bold text-green-300 mb-2">Future Aspects</h2>
+          <p className="text-gray-300 text-left">
+            1. Integration with wearables for real-time health monitoring.<br />
+            2. More AI models for additional health predictions.<br />
+            3. Mobile app development for better accessibility.<br />
+            4. Community-based health insights and coaching.
+          </p>
+        </motion.div>
+
+        {/* Tech Stack & Development Team in the same row */}
+        <motion.div
+          className="p-6 bg-gray-800 rounded-lg shadow-lg w-80 md:w-96"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInLeft}
+        >
+          <h2 className="text-xl font-bold text-green-300 mb-2">Tech Stack</h2>
+          <p className="text-gray-300 text-left">
+            Frontend: React, HTML, CSS, TailwindCSS<br />
+            Backend: Flask, Python<br />
+            Machine Learning Models: TensorFlow, Scikit-Learn<br />
+            Deployment: Render, AWS<br />
+            Database: MongoDB / Firebase (Future Integration)
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="p-6 bg-gray-800 rounded-lg shadow-lg w-80 md:w-96"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInRight}
+        >
+          <h2 className="text-xl font-bold text-green-300 mb-2">Development Team</h2>
+          <p className="text-gray-300 text-center">
+            Dev Shubhankar - <span className="text-blue-300">22052811</span> <br />
+            Aditi Saurya - <span className="text-blue-300">22052788</span> <br />
+            Aryan Raj Singh- <span className="text-blue-300">22051758</span> <br />
+            Aryadeep Pradhan- <span className="text-blue-300">22051843</span> <br />
+            Arnab Sen- <span className="text-blue-300">22051842</span> <br />
+            Sarthak Sharma- <span className="text-blue-300">2205767</span> <br />
+          </p>
+        </motion.div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const Obesity = () => {
+const Genhealth = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [result, setResult] = useState(null);
 
@@ -137,4 +137,4 @@ const Obesity = () => {
   );
 };
 
-export default Obesity;
+export default Genhealth;

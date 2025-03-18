@@ -22,7 +22,8 @@ const Stress = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg
+     ">
       <h2 className="text-xl font-semibold mb-4">Know Your Stress Level</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
         <label>Gender:
@@ -84,6 +85,25 @@ const Stress = () => {
       {result !== null && (
         <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
           <h3 className="text-lg font-semibold">Your Stress Level is: {result}</h3>
+          {result >= 3 && result <= 6 && (
+            <div className="mt-2">
+              <p>Here are some recommendations to manage stress:</p>
+              <ul className="list-disc pl-5">
+                <li>
+                  📺 Video: <a href="https://www.youtube.com/watch?v=RKECKQWVlO4&ab_channel=MotivationHub" target="_blank" rel="noopener noreferrer" className="text-blue-600">NEUROSCIENTIST: You Will NEVER Be Stressed Again | Andrew Huberman</a>
+                </li>
+                <li>
+                  📄 Article: <a href="https://www.health.harvard.edu/staying-healthy/top-ways-to-reduce-daily-stress" target="_blank" rel="noopener noreferrer" className="text-blue-600">Top Ways to Reduce Daily Stress (Harvard Health, Heidi Godman)</a>
+                </li>
+              </ul>
+            </div>
+          )}
+          {result >= 7 && (
+            <div className="mt-2 text-red-600">
+              <p>⚠️ Your stress level is high. Consider visiting a therapist or doctor as soon as possible.</p>
+              <p>You may also benefit from joining a therapy or support group.</p>
+            </div>
+          )}
         </div>
       )}
     </div>

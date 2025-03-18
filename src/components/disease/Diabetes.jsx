@@ -118,6 +118,25 @@ const Diabetes = () => {
       {result !== null && (
         <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
           <h3 className="text-lg font-semibold">Diabetes Prediction: {result === 1 ? "Diabetes Detected" : "No Diabetes"}</h3>
+
+          {result === 1 ? (
+            <div className="mt-4">
+              <h4 className="font-semibold">Recommendations:</h4>
+              <p>🎥 <a href="https://www.youtube.com/watch?v=1NIhv6fCqAU&ab_channel=ThisMorning" className="text-blue-500" target="_blank" rel="noopener noreferrer">
+                I Cured My Type 2 Diabetes | This Morning
+              </a></p>
+              <p>📄 <a href="https://www.niddk.nih.gov/health-information/diabetes/overview/healthy-living-with-diabetes" className="text-blue-500" target="_blank" rel="noopener noreferrer">
+                Healthy Living with Diabetes (NIDDK, NIH)
+              </a></p>
+            </div>
+          ) : (
+            <div className="mt-4">
+              <h4 className="font-semibold">Learn More:</h4>
+              <p>📄 <a href="https://www.who.int/news-room/fact-sheets/detail/diabetes" className="text-blue-500" target="_blank" rel="noopener noreferrer">
+                Diabetes - WHO Fact Sheet (World Health Organization - WHO)
+              </a></p>
+            </div>
+          )}
         </div>
       )}
     </div>
